@@ -5,7 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileWriter;
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,6 +63,24 @@ class VendingMachineDaoFileImplTest {
         assertNotNull(finalInventory, "Inventory should not be null.");
         assertEquals(finalInventory, expectedFinalInventory,
                 "Inventory after selling should decrease by 1.");
+    }
+
+    @Test
+    public void testCalculateChange() throws Exception{
+        // want to check the change given is the correct amount
+        // first item in inventory has a price of £3.50
+        Item firstItem = testDao.getItem(0);
+        // for amount given: £5
+        BigDecimal amountGiven = new BigDecimal("5.00");
+
+        Map<Change, Integer> expectedChange = new LinkedHashMap<Change, Integer>();
+        // change returned should be 1 £1 coin, 1 50p coin
+        expectedChange.put(Change.ONE_POUND, 1);
+        expectedChange.put(Change.FIFTY_PENCE, 1);
+
+        Map<Change, Integer> changeReturn = testDao.calculateChange(firstItem, amountGiven);
+        assertEquals(expectedChange, changeReturn,
+                "Change returned should be 1 £1 coin and 1 50p coin.");
     }
 
 }
