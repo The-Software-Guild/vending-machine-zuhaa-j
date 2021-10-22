@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao{
+public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao {
 
     public static final String AUDIT_FILE = "audit.txt";
 
@@ -14,12 +14,12 @@ public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao{
 
         try {
             out = new PrintWriter(new FileWriter(AUDIT_FILE, true));
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new VendingMachinePersistenceException("Could not persist audit information.", e);
         }
 
         LocalDateTime timestamp = LocalDateTime.now();
-        out.println(timestamp.toString()+" : "+entry);
+        out.println(timestamp.toString() + " : " + entry);
         out.flush();
     }
 }

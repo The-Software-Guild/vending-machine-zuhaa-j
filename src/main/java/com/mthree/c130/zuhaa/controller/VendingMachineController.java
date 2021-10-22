@@ -17,7 +17,7 @@ public class VendingMachineController {
     private VendingMachineView view;
     private VendingMachineServiceLayer service;
 
-    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view){
+    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;
     }
@@ -29,25 +29,25 @@ public class VendingMachineController {
         int menuSelection = 0;
         int totalItemAmount = 0;
         try {
-            while (keepGoing){
+            while (keepGoing) {
 
                 menuSelection = getMenuSelection();
                 totalItemAmount = getTotalItemAmount();
 
-                if (menuSelection == totalItemAmount + 1){
+                if (menuSelection == totalItemAmount + 1) {
                     keepGoing = false;
                     break;
                 }
 
                 BigDecimal amountPaid = gettingAmount();
-                Item chosenItem = gettingItemChoice(menuSelection-1);
+                Item chosenItem = gettingItemChoice(menuSelection - 1);
 
-                if (checkAmount(chosenItem, amountPaid)){
+                if (checkAmount(chosenItem, amountPaid)) {
                     sellTheItem(chosenItem, amountPaid);
                 }
             }
             exitMessage();
-        } catch (VendingMachinePersistenceException | NoItemInventoryException | InsufficientFundsException e){
+        } catch (VendingMachinePersistenceException | NoItemInventoryException | InsufficientFundsException e) {
             view.displayErrorMessage(e.getMessage());
         }
 
@@ -63,12 +63,12 @@ public class VendingMachineController {
         return itemList.size();
     }
 
-    public BigDecimal gettingAmount() throws VendingMachinePersistenceException{
+    public BigDecimal gettingAmount() throws VendingMachinePersistenceException {
         BigDecimal amount = view.getMoneyAmount();
         return amount;
     }
 
-    public Item gettingItemChoice(int choice) throws VendingMachinePersistenceException{
+    public Item gettingItemChoice(int choice) throws VendingMachinePersistenceException {
         return service.getItem(choice);
     }
 
@@ -83,17 +83,17 @@ public class VendingMachineController {
             try {
                 service.sellItem(soldItem, amountPaid);
                 hasErrors = false;
-            } catch (VendingMachinePersistenceException | NoItemInventoryException | InsufficientFundsException e){
+            } catch (VendingMachinePersistenceException | NoItemInventoryException | InsufficientFundsException e) {
                 hasErrors = true;
                 view.displayErrorMessage(e.getMessage());
             }
         } while (hasErrors);
 
-        Map<Change,Integer> changeDue = service.calculateChange(soldItem, amountPaid);
+        Map<Change, Integer> changeDue = service.calculateChange(soldItem, amountPaid);
         view.showChange(changeDue);
     }
 
-    public void exitMessage(){
+    public void exitMessage() {
         view.exitBanner();
     }
 

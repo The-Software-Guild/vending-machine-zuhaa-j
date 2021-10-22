@@ -1,7 +1,6 @@
 package com.mthree.c130.zuhaa.service;
 
 import com.mthree.c130.zuhaa.dao.Change;
-import com.mthree.c130.zuhaa.dao.VendingMachineDao;
 import com.mthree.c130.zuhaa.dao.VendingMachinePersistenceException;
 import com.mthree.c130.zuhaa.dto.Item;
 

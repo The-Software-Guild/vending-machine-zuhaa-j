@@ -10,12 +10,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer{
+public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
     VendingMachineDao dao;
     private VendingMachineAuditDao auditDao;
 
-    public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao){
+    public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao) {
         this.dao = dao;
         this.auditDao = auditDao;
     }
@@ -39,19 +39,19 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         return dao.getItem(choice);
     }
 
-    public Map<Change, Integer> calculateChange(Item soldItem, BigDecimal amountPaid) throws VendingMachinePersistenceException{
+    public Map<Change, Integer> calculateChange(Item soldItem, BigDecimal amountPaid) throws VendingMachinePersistenceException {
         return dao.calculateChange(soldItem, amountPaid);
     }
 
     private void validateMoneyAmount(Item buyingItem, BigDecimal amount) throws
-            InsufficientFundsException{
-        if (amount.compareTo(buyingItem.getCost())<0){
-            throw new InsufficientFundsException("Error: Insufficient Funds. You only entered: £"+amount);
+            InsufficientFundsException {
+        if (amount.compareTo(buyingItem.getCost()) < 0) {
+            throw new InsufficientFundsException("Error: Insufficient Funds. You only entered: £" + amount);
         }
     }
 
-    private void checkInventory(Item buyingItem) throws NoItemInventoryException{
-        if (buyingItem.getInventory() <= 0){
+    private void checkInventory(Item buyingItem) throws NoItemInventoryException {
+        if (buyingItem.getInventory() <= 0) {
             throw new NoItemInventoryException("Error: Out of stock.");
         }
     }

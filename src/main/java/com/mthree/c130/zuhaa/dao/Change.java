@@ -19,6 +19,7 @@ public enum Change {
 
 
     public final BigDecimal value;
+
     Change(BigDecimal value) {
         this.value = value;
     }

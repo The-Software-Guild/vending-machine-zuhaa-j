@@ -9,7 +9,10 @@ import java.util.Map;
 public interface VendingMachineDao {
 
     Item getItem(int choice) throws VendingMachinePersistenceException;
+
     List<Item> getAllItems() throws VendingMachinePersistenceException;
+
     Item sellItem(Item soldItem) throws VendingMachinePersistenceException;
+
     Map<Change, Integer> calculateChange(Item soldItem, BigDecimal amountPaid) throws VendingMachinePersistenceException;
 }

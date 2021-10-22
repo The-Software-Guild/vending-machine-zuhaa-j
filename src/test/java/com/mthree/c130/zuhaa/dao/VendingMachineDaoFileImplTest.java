@@ -4,19 +4,19 @@ import com.mthree.c130.zuhaa.dto.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class VendingMachineDaoFileImplTest {
 
     VendingMachineDao testDao;
 
-    public VendingMachineDaoFileImplTest(){
+    public VendingMachineDaoFileImplTest() {
     }
 
     @BeforeEach
@@ -26,7 +26,7 @@ class VendingMachineDaoFileImplTest {
     }
 
     @Test
-    public void testGetAllItems() throws Exception{
+    public void testGetAllItems() throws Exception {
         // testinventory has 3 items total already stored
         List<Item> testItemList = testDao.getAllItems();
 
@@ -37,7 +37,7 @@ class VendingMachineDaoFileImplTest {
     }
 
     @Test
-    public void testGetItem() throws Exception{
+    public void testGetItem() throws Exception {
         // know that first item in testinventory is:
         // Pringles::3.50::20
         // this will be presented with option 1.
@@ -51,7 +51,7 @@ class VendingMachineDaoFileImplTest {
     }
 
     @Test
-    public void testSellItem() throws Exception{
+    public void testSellItem() throws Exception {
         // once an item is sold, the inventory should decrease by one
         // first item in inventory is valid
         Item validItem = testDao.getItem(0);
@@ -66,7 +66,7 @@ class VendingMachineDaoFileImplTest {
     }
 
     @Test
-    public void testCalculateChange() throws Exception{
+    public void testCalculateChange() throws Exception {
         // want to check the change given is the correct amount
         // first item in inventory has a price of £3.50
         Item firstItem = testDao.getItem(0);

@@ -7,16 +7,16 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.*;
 
-public class VendingMachineDaoFileImpl implements VendingMachineDao{
+public class VendingMachineDaoFileImpl implements VendingMachineDao {
 
     private final String INVENTORY_FILE;
     public static final String DELIMITER = "::";
 
-    public VendingMachineDaoFileImpl(){
+    public VendingMachineDaoFileImpl() {
         INVENTORY_FILE = "inventory.txt";
     }
 
-    public VendingMachineDaoFileImpl(String inventoryTextFile){
+    public VendingMachineDaoFileImpl(String inventoryTextFile) {
         INVENTORY_FILE = inventoryTextFile;
     }
 
@@ -48,9 +48,9 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao{
         BigDecimal itemCost = soldItem.getCost();
         BigDecimal change = amountPaid.subtract(itemCost);
         Map<Change, Integer> changeReturn = new LinkedHashMap<Change, Integer>();
-        for (Change c : Change.values()){
+        for (Change c : Change.values()) {
             BigDecimal[] values = change.divideAndRemainder(c.value, MathContext.DECIMAL32);
-            if (!(values[0].equals(BigDecimal.ZERO))&&!(values[1].equals(BigDecimal.ZERO))){
+            if (!(values[0].equals(BigDecimal.ZERO)) && !(values[1].equals(BigDecimal.ZERO))) {
                 changeReturn.put(c, values[0].intValue());
                 change = values[1];
             }
@@ -58,7 +58,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao{
         return changeReturn;
     }
 
-    private Item unmarshallItem(String itemAsText){
+    private Item unmarshallItem(String itemAsText) {
         String[] itemTokens = itemAsText.split(DELIMITER);
         String name = itemTokens[0];
         BigDecimal cost = new BigDecimal(itemTokens[1]);
@@ -72,14 +72,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao{
 
         try {
             scanner = new Scanner(new BufferedReader(new FileReader(INVENTORY_FILE)));
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new VendingMachinePersistenceException(
-                    "-_- Could not load vending machine data into memory.",e);
+                    "-_- Could not load vending machine data into memory.", e);
         }
 
         String currentLine;
         Item currentItem;
-        while (scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentItem = unmarshallItem(currentLine);
 
@@ -89,7 +89,7 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao{
         scanner.close();
     }
 
-    private String marshallItem(Item anItem){
+    private String marshallItem(Item anItem) {
         String itemAsText = anItem.getName() + DELIMITER;
         itemAsText += anItem.getCost() + DELIMITER;
         itemAsText += anItem.getInventory();
@@ -99,16 +99,16 @@ public class VendingMachineDaoFileImpl implements VendingMachineDao{
     private void writeInventory() throws VendingMachinePersistenceException {
         PrintWriter out;
 
-        try{
+        try {
             out = new PrintWriter(new FileWriter(INVENTORY_FILE));
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new VendingMachinePersistenceException(
                     "Could not save vending machine data.", e);
         }
 
         String itemAsText;
         List<Item> itemList = this.getAllItems();
-        for (Item currentItem : itemList){
+        for (Item currentItem : itemList) {
             itemAsText = marshallItem(currentItem);
             out.println(itemAsText);
             out.flush();

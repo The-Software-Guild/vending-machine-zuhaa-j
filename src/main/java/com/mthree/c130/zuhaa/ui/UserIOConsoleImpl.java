@@ -1,31 +1,28 @@
 package com.mthree.c130.zuhaa.ui;
 
-import com.mthree.c130.zuhaa.dao.VendingMachinePersistenceException;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class UserIOConsoleImpl implements UserIO{
+public class UserIOConsoleImpl implements UserIO {
 
 
     Scanner input = new Scanner(System.in);
 
-    public void print(String message){
+    public void print(String message) {
         System.out.println(message);
     }
 
-    public String readString(String prompt){
+    public String readString(String prompt) {
         Scanner userInput = new Scanner(System.in);
         System.out.println(prompt);
         String response = userInput.nextLine();
         return response;
     }
 
-    public int readInt(String prompt){
+    public int readInt(String prompt) {
         Boolean hasErrors = true;
         int intOutput = 0;
         do {
@@ -34,7 +31,7 @@ public class UserIOConsoleImpl implements UserIO{
                 intOutput = input.nextInt();
                 input.nextLine();
                 hasErrors = false;
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Try again.");
                 input.nextLine();
             }
@@ -42,20 +39,20 @@ public class UserIOConsoleImpl implements UserIO{
         return intOutput;
     }
 
-    public int readInt(String prompt, int min, int max){
+    public int readInt(String prompt, int min, int max) {
         int num = 0;
         Boolean valid = false;
-        while (!valid){
+        while (!valid) {
             try {
                 System.out.println(prompt);
                 num = input.nextInt();
                 input.nextLine();
-                if (num<min || num >max){
+                if (num < min || num > max) {
                     System.out.println("Number out of range! Try again.");
-                } else{
+                } else {
                     valid = true;
                 }
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Try again.");
                 input.nextLine();
             }
@@ -71,12 +68,12 @@ public class UserIOConsoleImpl implements UserIO{
     public double readDouble(String prompt, double min, double max) {
         double num = 0;
         Boolean valid = false;
-        while (!valid){
+        while (!valid) {
             System.out.println(prompt);
             num = input.nextDouble();
-            if (num<min || num >max){
+            if (num < min || num > max) {
                 System.out.println("Number out of range! Try again.");
-            } else{
+            } else {
                 valid = true;
             }
         }
@@ -91,12 +88,12 @@ public class UserIOConsoleImpl implements UserIO{
     public float readFloat(String prompt, float min, float max) {
         float num = 0;
         Boolean valid = false;
-        while (!valid){
+        while (!valid) {
             System.out.println(prompt);
             num = input.nextFloat();
-            if (num<min || num >max){
+            if (num < min || num > max) {
                 System.out.println("Number out of range! Try again.");
-            } else{
+            } else {
                 valid = true;
             }
         }
@@ -111,12 +108,12 @@ public class UserIOConsoleImpl implements UserIO{
     public long readLong(String prompt, long min, long max) {
         long num = 0;
         Boolean valid = false;
-        while (!valid){
+        while (!valid) {
             System.out.println(prompt);
             num = input.nextLong();
-            if (num<min || num >max){
+            if (num < min || num > max) {
                 System.out.println("Number out of range! Try again.");
-            } else{
+            } else {
                 valid = true;
             }
         }
@@ -133,21 +130,21 @@ public class UserIOConsoleImpl implements UserIO{
         Scanner userInputBigDecimal = new Scanner(System.in);
         BigDecimal num = BigDecimal.ZERO;
         Boolean valid = false;
-        while (!valid){
+        while (!valid) {
             try {
                 System.out.println(prompt);
                 num = new BigDecimal(userInputBigDecimal.nextLine());
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Invalid input. Try again.");
                 System.out.println(prompt);
                 userInputBigDecimal.nextLine();
             }
         }
 
-        while (num.compareTo(BigDecimal.ZERO)<0){
+        while (num.compareTo(BigDecimal.ZERO) < 0) {
             System.out.println("Number must be positive. Try again.");
             num = new BigDecimal(userInputBigDecimal.nextLine());
-            }
+        }
         return num;
     }
 }

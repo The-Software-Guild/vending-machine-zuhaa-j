@@ -31,17 +31,17 @@ public class Item {
     private BigDecimal cost;
     private int inventory;
 
-    public Item(String name){
+    public Item(String name) {
         this.name = name;
     }
 
-    public Item(String name, BigDecimal cost, int inventory){
+    public Item(String name, BigDecimal cost, int inventory) {
         this.name = name;
         this.cost = cost;
         this.inventory = inventory;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
