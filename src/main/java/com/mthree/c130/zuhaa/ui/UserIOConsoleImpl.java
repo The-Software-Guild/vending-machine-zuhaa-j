@@ -134,6 +134,7 @@ public class UserIOConsoleImpl implements UserIO {
             try {
                 System.out.println(prompt);
                 num = new BigDecimal(userInputBigDecimal.nextLine());
+                valid = true;
             } catch (Exception e) {
                 System.out.println("Invalid input. Try again.");
                 System.out.println(prompt);

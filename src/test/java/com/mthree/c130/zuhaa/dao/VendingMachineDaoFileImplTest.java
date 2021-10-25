@@ -21,7 +21,7 @@ class VendingMachineDaoFileImplTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        String testFile = "testinventory.txt";
+        String testFile = "testInventory.txt";
         testDao = new VendingMachineDaoFileImpl(testFile);
     }
 

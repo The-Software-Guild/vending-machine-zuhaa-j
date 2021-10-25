@@ -24,14 +24,14 @@ class VendingMachineServiceLayerImplTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        String testFile = "testinventory.txt";
+        String testFile = "testInventory.txt";
         testDao = new VendingMachineDaoFileImpl(testFile);
         testService = new VendingMachineServiceLayerImpl(testDao, testAuditDao);
     }
 
     @Test
     public void testNoItemInventory() throws Exception {
-        // testinventory has two items with inventory 0 and -10
+        // testInventory has two items with inventory 0 and -10
         // these will be stored in testItemList[1] and testItemList[2]
         List<Item> testItemList = testService.getAllItems();
         // using some valid amount of money
